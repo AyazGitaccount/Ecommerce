@@ -20,6 +20,11 @@
     <!-- endinject -->
     <link rel="shortcut icon" href={{ asset("admin/images/favicon.png") }} />
     @livewireStyles
+    <style>
+        .slider .nav .nav-item.active{
+            background-color: #e9e9e9;
+        }
+    </style>
 </head>
 
 <body>

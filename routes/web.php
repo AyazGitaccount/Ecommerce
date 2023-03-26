@@ -22,11 +22,17 @@ use App\Http\Livewire\Frontend\CategoryCollection;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Admin\Orders\AdminOrderList;
 use App\Http\Livewire\Admin\Orders\ListOfOrder;
 use App\Http\Livewire\Admin\SiteSetting\SiteSetting;
+use App\Http\Livewire\Admin\Users\AddUsers;
+use App\Http\Livewire\Admin\Users\UsersPage;
+use App\Http\Livewire\ChangePassword\ChangePassword;
 use App\Http\Livewire\Frontend\Featured\FeaturedProducts;
 use App\Http\Livewire\Frontend\NewArrival\NewArrivalProducts;
+use App\Http\Livewire\Frontend\Search\SearchProducts;
+use App\Http\Livewire\UserProfile\UserProfile;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,14 +44,18 @@ Route::get('/collections/{slug}',Products::class);
 Route::get('/collections/{slug}/{product_slug}',ViewProduct::class);
 Route::get('/new_arrival',NewArrivalProducts::class);
 Route::get('/featured-products',FeaturedProducts::class);
+Route::get('/search',SearchProducts::class);
 
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function() {
+
     Route::get('/wishlist',WishlistPage::class)->name('wishlist');
     Route::get('/cartlist',Cartlist::class)->name('cart');
     Route::get('/checkout',Checkout::class)->name('checkout');   
     Route::get('/orders',OrdersList::class); 
     Route::get('orders/{order_id}',ViewOrder::class); 
+    Route::get('/profile',UserProfile::class);
+    Route::get('/change_password',ChangePassword::class);
 });
 
 Route::get('Thank_you',ThankYouPage::class);
@@ -113,10 +123,15 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function()
         Route::put('/orders/{order_id}','Update_order_status');
         Route::get('/invoice/{order_id}/generate','generate_inovice');
         Route::get('/invoice/{order_id}','download_inovice');
+        Route::get('invoice/{order_id}/mail','send_inovice');
    });
 
    //Admin site settings 
    Route::get('/setting',SiteSetting::class);
+
+   //Users Rolles 
+   Route::get('/users',UsersPage::class);
+   Route::get('/add-users',AddUsers::class)->name('add-users');
 });
 
 

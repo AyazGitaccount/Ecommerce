@@ -20,6 +20,7 @@
                         <a href="{{ url('admin/orders') }}" class="btn btn-danger btn-sm float-end ms-1">Back</a>
                         <a href="{{ url('admin/invoice/'.$order->id) }}" class="btn btn-primary btn-sm float-end mx-1">Download inovice</a>
                         <a href="{{ url('admin/invoice/'.$order->id.'/generate') }}" target='_blank' class="btn btn-warning btn-sm float-end me-1">View inovice</a>
+                        <a href="{{ url('admin/invoice/'.$order->id.'/mail') }}" target='_blank' class="btn btn-info btn-sm float-end me-1">Send Inovice View Mail</a>
                     </h4>
                     <hr>
                     <div class="row">

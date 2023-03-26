@@ -3,15 +3,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                    <h5 class="brand-name">Ecom</h5>
+                    <h5 class="brand-name">{{ $app_setting->website_name ?? 'website name' }}</h5>
                 </div>
                 <div class="col-md-5 my-auto">
-                    <form role="search">
+                    <form wire:submit.prevent='register'  role="search">
                         <div class="input-group">
-                            <input type="search" placeholder="Search your product" class="form-control" />
-                            <button class="btn bg-white" type="submit">
+                            <input type="search" wire:model="search" value="" placeholder="Search your product" class="form-control" />
+                            <a href="{{ url('/search') }}" class="btn bg-white"  type="submit">
                                 <i class="fa fa-search"></i>
-                            </button>
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -47,12 +47,9 @@
                                 <i class="fa fa-user" style="margin-right: 3px"> </i>{{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> My Wishlist</a>
+                                <li><a class="dropdown-item" href="{{ url('/profile') }}"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ url('/orders') }}"><i class="fa fa-list"></i> My Orders</a></li>
                                 </li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My
-                                        Cart</a></li>
                                 <li>
                                     {{-- <a class="dropdown-item" href="#"> Logout</a> --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"

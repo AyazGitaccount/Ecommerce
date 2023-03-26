@@ -12,7 +12,7 @@ class Setting extends Model
     protected $table = 'settings';
 
     protected $fillable =[
-        'website_name',
+         'website_name',
          'webiste_url',
          'page_title',
          'meta_keyword',
@@ -23,7 +23,6 @@ class Setting extends Model
          'phone2',
          'email1',
          'email2',
-         
          'facebook',
          'twitter',
          'instagram',

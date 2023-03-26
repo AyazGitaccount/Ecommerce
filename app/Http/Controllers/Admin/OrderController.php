@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\inovice_order_mailable;
 
 class OrderController extends Controller
 {
@@ -73,6 +75,20 @@ class OrderController extends Controller
         $pdf = Pdf::loadView('admin.invoice.generate_invoice', $data);
         $today_date = Carbon::now()->format('d-m-Y');
         return $pdf->download('invoice-'.$order->id.'-'.$today_date.'.pdf');
+    }
+
+    public function send_inovice(int $order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        try{
+            Mail::to("$order->email")->send(new inovice_order_mailable($order));
+            return redirect('admin/orders/'.$order_id)->with('message','Invoice Mail has been sent to '.$order->email);
+            
+        }
+        catch(\Exception $e){
+            return redirect('admin/orders/'.$order_id)->with('message','Something went worng ');
+
+        }
     }
     
 }
