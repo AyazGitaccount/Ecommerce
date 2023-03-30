@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class SiteSetting extends Component
 {
-    public  $website_name, $website_url, $page_title, $meta_keywords,$meta_description;
+    public  $website_name, $webiste_url, $page_title, $meta_keyword,$meta_description;
     public $address,$phone1,$phone2,$email1, $email2,$facebook, $twitter, $instagram,$youtube; 
    
    
@@ -19,9 +19,9 @@ class SiteSetting extends Component
         {
             $setting->update([
                 'website_name'=>$this->website_name,
-                'webiste_url'=>$this->website_url,
+                'webiste_url'=>$this->webiste_url,
                 'page_title'=>$this->page_title,
-                'meta_keywords'=>$this->meta_keywords,
+                'meta_keyword'=>$this->meta_keyword,
                 'meta_description'=>$this->meta_description,
                 'address'=>$this->address,
                 'phone1'=>$this->phone1,
@@ -34,7 +34,7 @@ class SiteSetting extends Component
                 'youtube'=>$this->youtube  
             ]);
             
-            return redirect()->back()->with('message',"Sittings updated ");
+            return redirect()->back()->with('message',"Settings updated ");
             
         }
         else
@@ -42,9 +42,9 @@ class SiteSetting extends Component
            
             Setting::create([
                 'website_name'=>$this->website_name,
-                'webiste_url'=>$this->website_url,
+                'webiste_url'=>$this->webiste_url,
                 'page_title'=>$this->page_title,
-                'meta_keywords'=>$this->meta_keywords,
+                'meta_keyword'=>$this->meta_keyword,
                 'meta_description'=>$this->meta_description,
                 'address'=>$this->address,
                 'phone1'=>$this->phone1,
@@ -57,7 +57,7 @@ class SiteSetting extends Component
                 'youtube'=>$this->youtube  
             ]);
             
-            return redirect()->back()->with('message',"Sittings created ");
+            return redirect()->back()->with('message',"Settings created ");
             
         }
     }
@@ -66,6 +66,11 @@ class SiteSetting extends Component
     public function render()
     {
         $setting = Setting::first();
+        
+        foreach($setting->toArray() as $key => $value){
+            $this->{$key} = $value;
+        }
+
         return view('livewire.admin.site-setting.site-setting',compact('setting'));
     }
 }

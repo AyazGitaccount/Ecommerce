@@ -43,7 +43,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <th>Order ID</th>
-                            <th>Tracking NO</th>
+                            <th>Tracking no.</th>
                             <th>Username</th>
                             <th>Payment Mode</th>
                             <th>Ordered Date</th>
@@ -79,6 +79,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

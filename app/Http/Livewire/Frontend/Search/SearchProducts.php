@@ -11,23 +11,11 @@ class SearchProducts extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     
-    public $search,$search_products;
-
-
-    public function mount()
-    {
-        $search=$this->search;
-    }
+    public $search;
+    protected $queryString = ['search'];
     public function render()
     {
-        if($this->search)
-        {
-            $this->search_products = Product::where('name','like','%'.$this->search.'%')->latest(15)->paginate();
-        }
-        else
-        {
-            return redirect()->back()->with('message','no products found');
-        }
-        return view('livewire.frontend.search.search-products',['search_products'=>$this->search_products])->extends('layouts.app')->section('title','search');
+        $search_result = Product::where('name','like','%'.$this->search.'%')->paginate(3);      
+        return view('livewire.frontend.search.search-products',compact('search_result'));
     }
 }

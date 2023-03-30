@@ -1,5 +1,5 @@
 <section>
-  <div class="container-fluid m-0 p-0 ">
+  <div class="container-fluid m-0 p-0 " style="min-height: 100vh;">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
       <div class="carousel-inner">
         @foreach ($slider as $key => $item)
@@ -57,10 +57,9 @@
             <h4 class="mb-4">Trending Products</h4>
             <div class="underline"></div>
           </div>
-
           @if($trending_products)
           <div class="col-md-12">
-            <div class="owl-carousel owl-theme four-carousel">
+            <div class="owl-carousel owl-theme four-carousel" style="display: block">
               @foreach ( $trending_products as $item)
               <div class="item">
                 <div class="product-card shadow">
@@ -107,7 +106,7 @@
         <div class="row ">
           <div class="col-md-12">
             <h4 class="mb-4">New Arrival
-              <a href="{{ url('/new_arrival') }}" class="btn btn-warning">View More</a>
+              <a href="{{ url('/new_arrival') }}" class="btn btn-warning btn-sm">View More</a>
 
             </h4>
             <div class="underline"></div>
@@ -115,7 +114,7 @@
 
           @if($new_arrival)
           <div class="col-md-12">
-            <div class="owl-carousel owl-theme four-carousel">
+            <div class="owl-carousel owl-theme four-carousel" style="display: block">
               @foreach ( $new_arrival as $item)
               <div class="item">
                 <div class="product-card shadow">
@@ -162,15 +161,14 @@
         <div class="row ">
           <div class="col-md-12">
             <h4 class="mb-4">Featured Products
-              <a href="{{ url('/featured-products') }}" class="btn btn-warning">View More</a>
+              <a href="{{ url('/featured-products') }}" class="btn btn-warning btn-sm">View More</a>
             </h4>
-
             <div class="underline"></div>
           </div>
 
           @if($featured_products)
           <div class="col-md-12">
-            <div class="owl-carousel owl-theme four-carousel">
+            <div class="owl-carousel owl-theme four-carousel" style="display: block">
               @foreach ( $featured_products as $item)
               <div class="item">
                 <div class="product-card shadow">
@@ -213,14 +211,14 @@
     </div>
   </div>
 </section>
-
-@push('scripts')
+{{-- @endsection --}}
+@push('scripts') 
 <script>
-    $('.four-carousel').owlCarousel({
+  $('.four-carousel').owlCarousel({
     loop:true,
     margin:10,
-    dots:true,
-    nav:false,
+    dots:false,
+    nav:true,
     responsive:{
         0:{
             items:1
@@ -234,5 +232,4 @@
     }
 })
 </script>
-  
-@endpush
+@endpush()

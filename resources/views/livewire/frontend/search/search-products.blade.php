@@ -5,9 +5,7 @@
                 <h4 class="mb-4">Search Result</h4>
                 <div class="underline"></div>
             </div>
-
-
-            @forelse ( $search_products as $item)
+            @forelse ( $search_result as $item)
             <div class="col-md-3">
                 <div class="product-card shadow">
                     <div class="product-card-img">
@@ -42,7 +40,7 @@
 
         </div>
         <div>
-            {{ $search_products->links() }}
+            {{ $search_result->links() }}
         </div>
     </div>
 </div>

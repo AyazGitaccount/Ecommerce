@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title1','site settings')
+{{-- @section('title1','site settings') --}}
 @section('content')
 
 <div>

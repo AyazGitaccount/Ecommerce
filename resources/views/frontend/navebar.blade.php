@@ -1,17 +1,17 @@
-<div class="main-navbar shadow-sm sticky-top">
-    <div class="top-navbar">
+<div class="main-navbar shadow-sm sticky-top" id="navbar">
+    <div class="top-navbar"  style="transition: top 0.3s;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
                     <h5 class="brand-name">{{ $app_setting->website_name ?? 'website name' }}</h5>
                 </div>
                 <div class="col-md-5 my-auto">
-                    <form wire:submit.prevent='register'  role="search">
+                    <form action="{{ url('/search') }}" method="GET" role="search">
                         <div class="input-group">
-                            <input type="search" wire:model="search" value="" placeholder="Search your product" class="form-control" />
-                            <a href="{{ url('/search') }}" class="btn bg-white"  type="submit">
+                            <input type="search"  name='search' value="" placeholder="Search your product" class="form-control" />
+                            <button  class="btn bg-white"  type="submit">
                                 <i class="fa fa-search"></i>
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" >
         <div class="container-fluid">
             <a class="navbar-brand d-block d-sm-block d-md-none d-lg-none" href="#">
                 Funda Ecom
@@ -95,9 +95,9 @@
                         <a class="nav-link" href="{{ url('/featured-products') }}">Featured Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Electronics</a>
+                        <a class="nav-link" href="{{ url('/collections/electronics') }}">Electronics</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="#">Fashions</a>
                     </li>
                     <li class="nav-item">
@@ -106,7 +106,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="#">Appliances</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
@@ -114,19 +114,17 @@
 </div>
 
 
-{{-- <li class="nav-item dropdown">
-    <a id="navebarDropdown" class="nav-link dropdwon-toggle" href="#" role="button" data-bs-toggle="dropdown"
-        aria-expanded="false">{{ Auth::user()->name }}
-    </a>
-
-
-    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{ route('logout') }}"
-            onclick="event.preventDefault();document.getElementById('logout-form').submit();"></a>
-
-        <form id="logout-form" action="{{ route('logut') }}">
-            @csrf
-        </form>
-
-    </div>
-</li> --}}
+@push('scripts')
+  <script>
+    var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+  } else {
+    document.getElementById("navbar").style.top = "-100px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+    </script>  
+@endpush

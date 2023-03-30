@@ -30,4 +30,22 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => 'http://example.com/callback-url',
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://example.com/callback-url',
+    ],
+
+    'google' => [
+        'client_id' => '898436280686-jhb1uh51a1s7cq33bvq2l7g7r79jqrkb.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost:8000/authorized/google/callback',
+    ],
+
 ];

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -102,7 +103,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <form action="{{ url('admin/orders/'.$order->id) }}" method="POST">
+                            <form action="{{ url('admin/orders/'.$order->id.'/update') }}" method="POST">
                                 @csrf
                                 @method('PUT')
 

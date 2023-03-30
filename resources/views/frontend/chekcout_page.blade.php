@@ -2,7 +2,7 @@
 @section('title','Checkout')
 
 <div>
-    <livewire:frontend.chekcout.checkout>
+    <livewire:frontend.checkout.checkout>
 </div>
 
 @endsection

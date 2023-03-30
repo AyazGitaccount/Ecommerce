@@ -4,17 +4,28 @@ namespace App\Http\Livewire\Frontend\Chekcout;
 
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\Order_item;
 use Livewire\Component;
+use App\Models\Order_item;
 use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\Catch_;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Checkout extends Component
 {
     public $cart, $grand_total=0;
 
     public $fullname,$email, $phone,  $pincode, $address, $payment_mode=Null,$payment_id=Null;
-
+    
+    protected $listeners = [
+        'validationForAll',
+        'transactionEmit' => 'online_payment'
+    ];
+    
+    public function validationForAll()
+    {
+        $this->validate();
+    }
+    
     public function rules()
     {
        return [
@@ -40,12 +51,13 @@ class Checkout extends Component
             'address'=>$this->address,
             'status_message'=> 'in progress',
             'payment_mode'=>$this->payment_mode,
-            'payment_id'
+            'payment_id'=>'' ,
+            
         ]);
        
         foreach($this->cart as $cartitem)
         {
-            $order_items = Order_item::create([
+             Order_item::create([
             'order_id'=>$order->id,
             'product_id'=>$cartitem->product_id,
             'product_color_id'=>$cartitem->product_color_id,
@@ -64,7 +76,6 @@ class Checkout extends Component
         return $order;         
     }
 
-
     public function cod()
     {
         $this->payment_mode = 'Cash on Delivery';
@@ -82,7 +93,6 @@ class Checkout extends Component
         }
     }
 
-
     public function products_total_amount()
     {   $this->grand_total = 0 ;
         $this->cart =Cart::where('user_id',auth()->user()->id)->get();
@@ -92,14 +102,42 @@ class Checkout extends Component
         }
         return $this->grand_total;
     }
+   
+    public function online_payment($transaction_id )
+    {     
+           
+      $this->payment_id = $transaction_id;   
+      $this->payment_mode = "Paid by Paypal";
+      $cod_order = $this->Place_order();
+      if($cod_order)
+      {
+         Cart::where('user_id',auth()->user()->id)->delete();
+         session()->flash('message','Order Placed Successfully');
+         return redirect()->to('Thank_you');
+      }
+      else
+      {
+          session()->flash('message','Something went worng');
+          return false;
+      }
+    }
 
+    public function success()
+    {
+       
+         
+    }
 
+    public function cancel()
+    {
+        # code...
+    }
 
     public function render()
     {
         $this->fullname = auth()->user()->name;
         $this->email = auth()->user()->email;
         $this->grand_total = $this->products_total_amount();
-        return view('livewire.frontend.chekcout.checkout',['grand_total'=>$this->grand_total]);
+        return view('livewire.frontend.checkout.checkout',['grand_total'=>$this->grand_total]);
     }
 }

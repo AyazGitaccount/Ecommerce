@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Brand\Index;
 use App\Http\Livewire\Frontend\Cartlist;
 use App\Http\Livewire\Frontend\Products;
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Frontend\FrontIndex;
+use App\Http\Livewire\Admin\Users\AddUsers;
 use App\Http\Livewire\Frontend\ViewProduct;
 use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\Admin\Users\UsersPage;
 use App\Http\Livewire\Frontend\ThankYouPage;
 use App\Http\Livewire\Frontend\WishlistPage;
+use App\Http\Livewire\UserProfile\UserProfile;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Livewire\Frontend\Orders\ViewOrder;
 use App\Http\Controllers\Admin\ProductController;
@@ -20,19 +26,12 @@ use App\Http\Livewire\Frontend\Chekcout\Checkout;
 use App\Http\Livewire\Frontend\Orders\OrdersList;
 use App\Http\Livewire\Frontend\CategoryCollection;
 use App\Http\Controllers\Admin\dashboardController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\frontend\FrontendController;
-use App\Http\Controllers\SearchController;
-use App\Http\Livewire\Admin\Orders\AdminOrderList;
-use App\Http\Livewire\Admin\Orders\ListOfOrder;
+use App\Http\Controllers\Login_With_GoogleController;
 use App\Http\Livewire\Admin\SiteSetting\SiteSetting;
-use App\Http\Livewire\Admin\Users\AddUsers;
-use App\Http\Livewire\Admin\Users\UsersPage;
 use App\Http\Livewire\ChangePassword\ChangePassword;
+use App\Http\Livewire\Frontend\Search\SearchProducts;
 use App\Http\Livewire\Frontend\Featured\FeaturedProducts;
 use App\Http\Livewire\Frontend\NewArrival\NewArrivalProducts;
-use App\Http\Livewire\Frontend\Search\SearchProducts;
-use App\Http\Livewire\UserProfile\UserProfile;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,7 +45,7 @@ Route::get('/new_arrival',NewArrivalProducts::class);
 Route::get('/featured-products',FeaturedProducts::class);
 Route::get('/search',SearchProducts::class);
 
-
+// User side routes for home and other pages
 Route::middleware(['auth'])->group(function() {
 
     Route::get('/wishlist',WishlistPage::class)->name('wishlist');
@@ -58,10 +57,19 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/change_password',ChangePassword::class);
 });
 
-Route::get('Thank_you',ThankYouPage::class);
+Route::get('Thank_you',ThankYouPage::class)->name('thank-you-page');
 
+// Login and register routes
 Route::get('/register',Register::class)->name('register');
 Route::get('/login',Login::class)->name('login');
+
+// Login with github
+
+// Login with Google
+Route::get('authorized/google', [Login_With_GoogleController::class, 'redirect_to_Google']);
+Route::get('authorized/google/callback', [Login_With_GoogleController::class, 'handle_Google_Callback']);
+ 
+    // $user->token
 
 Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function()
 {   
@@ -118,9 +126,9 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function()
     //admin side orderslist and view_orders pages
     Route::controller(OrderController::class)->group(function()
     {
-        Route::get('/orders','orderview');
-        Route::get('/orders/{order_id}','display');
-        Route::put('/orders/{order_id}','Update_order_status');
+        Route::get('/orders','display');
+        Route::get('/orders/{order_id}','orderview');
+        Route::put('/orders/{order_id}/update','Update_order_status');
         Route::get('/invoice/{order_id}/generate','generate_inovice');
         Route::get('/invoice/{order_id}','download_inovice');
         Route::get('invoice/{order_id}/mail','send_inovice');
@@ -134,6 +142,6 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function()
    Route::get('/add-users',AddUsers::class)->name('add-users');
 });
 
-
+// Route::get('/search',[SearchController::class,'search']);
 
 Route::get('/logout',[ Logout::class, 'logout'])->name('logout');

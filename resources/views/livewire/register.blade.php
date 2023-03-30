@@ -1,4 +1,4 @@
-<div class="container mb-5" >
+<div class="container mb-5"  style="min-height: 100vh;" >
     <div class="row justify-content-center mt-5" >
         <div class="col-md-6 ">
             <div class="card py-4 px-5 shadow" style="background-color:rgb(247, 247, 247);">
@@ -6,7 +6,7 @@
                     <div class="d-flex justify-content-center">
                         <h2>Register</h2>
                     </div>
-                    <form class="pt-3" wire:submit.prevent='register'>
+                    <form class="pt-3 mb-4" wire:submit.prevent='register'>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" wire:model="name" id="name">
@@ -37,6 +37,10 @@
                         <button type="submit" class="btn btn-primary form-control ">Register</button>
                         {{-- <a class="btn btn-outline-primary  mx-2" href="/login" role="button">Login</a> --}}
                     </form>
+                    <hr>
+                    <p class="text-lead text-center mt-4">Already have account ? <a href="{{ url('/login') }}" class="text-decoration-none">Login</a></p>
+
+                    
                 </div>
             </div>
         </div>

@@ -116,7 +116,7 @@
                     </div>
                     <div class="card-body">
                         <p>
-                            {!!$product->description !!}
+                            {{$product->description }}
                         </p>
                     </div>
                 </div>

@@ -16,44 +16,34 @@
     <!-- Default theme -->
     {{-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/> --}}
     {{-- Owl Carousl --}}
-    <link rel="stylesheet" href="{{'assets/exzoom/jquery.exzoom.css' }}">
-    <link rel="stylesheet" href="{{'assets/css/owl.carousel.css' }}">
-    <link rel="stylesheet" href="{{'assets/css/owl.carousel.min.css' }}">
-    <link rel="stylesheet" href="{{'assets/css/owl.theme.default.min.css'}}">
+    {{-- <link rel="stylesheet" href="{{'assets/exzoom/jquery.exzoom.css' }}"> --}}
+    <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     @livewireStyles
+    <script src="https://kit.fontawesome.com/c65a772b92.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 
     @include('frontend.navebar')
       {{ $slot }}
+     
     @include('frontend.footer.footer')
-
-
-
 
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
         crossorigin="anonymous">
     </script>
-    <script src="{{'assets/js/owl.carousel.min.js'}}"></script>
-
-     <script src="{{ 'assets/exzoom/jquery.exzoom.js' }}"></script>
-
+    
+    <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
-   
-    {{-- <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> --}}
-    
-    {{-- <script>
-        window.addEventListener('message', event => {
-        alertify.set('notifier','position', 'top-right');
-        alertify.success(event.detail.text);
-    });
-    </script> --}}
+
+    {{-- @yield('scripts') --}}
     @livewireScripts
-    @stack('script')
+    @stack('scripts')
 </body>
 </html>

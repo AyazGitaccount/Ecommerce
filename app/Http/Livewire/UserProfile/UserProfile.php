@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\UserProfile;
 
 use App\Models\User;
+use App\Models\UserDetail;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class UserProfile extends Component
         $this->validate([
             'name'=> 'required|string',
             'phone'=> 'required|digits:11',
-            'zip_pin'=> 'required|digits:6',
+            'zip_pin'=> 'required|digits:5',
             'address'=> 'required|string|max:499',
         ]);
 
@@ -30,7 +31,7 @@ class UserProfile extends Component
             ],
             [
                 'phone' => $this->phone,
-                'zip/pin' => $this->zip_pin,
+                'zip_code' => $this->zip_pin,
                 'address' => $this->address,
             ]
         );
@@ -38,8 +39,21 @@ class UserProfile extends Component
         return redirect()->back()->with('message','User Profile Updated' );
     }
 
+  public function mount()
+  {
+    $user =  User::findOrFail(Auth::user()->id);
+    $this->phone = $user->userDetail->phone;
+    $this->zip_pin = $user->userDetail->zip_code;
+    $this->address = $user->userDetail->address;
+    
+  }
     public function render()
     {
-        return view('livewire.user-profile.user-profile');
+        $user =  User::findOrFail(Auth::user()->id);
+        foreach($user->toArray() as $key => $value){
+            $this->{$key} = $value;
+        }
+       
+        return view('livewire.user-profile.user-profile',compact('user'));
     }
 }

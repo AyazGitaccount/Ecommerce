@@ -12,15 +12,7 @@ class UsersPage extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     
-    public $name,$email,$password,$role,$user_id;
-
-    // protected $rules= [
-    //         'name' => 'required|string',
-    //         'email' => 'required|string|email|unique:users',
-    //         'password' => 'required|string|min:8',
-    //         'role' => 'required|integer'
-    //     ];
-    
+    public $name,$email,$password,$role,$user_id;  
      
     public function restInput(){
         $this->name = Null;

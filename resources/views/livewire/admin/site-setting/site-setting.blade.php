@@ -1,13 +1,13 @@
 <div class="row">
-    <div class="col-md-12 grid-margin">
-        <div>
+    <div class="col-md-12 grid-margin ">
+        <div class="mx-4 my-4">
             @if (session()->has('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
             @endif
         </div>
-        <form wire:submit.prevent='store'>
+        <form wire:submit.prevent='store' class="mx-3 my-3">
             @csrf
             <div class="card mb-3">
                 <div class="card-header bg-primary">
@@ -17,23 +17,23 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label>Website Name</label>
-                            <input type="text" wire:model.defer="website_name" value="{{ $setting['website_name'] ?? '' }}" class="form-control">
+                            <input type="text" wire:model.defer="website_name" value="{{ $setting->website_name ?? '' }}" class="form-control">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Website URL</label>
-                            <input type="text" wire:model.defer="website_url" value="{{ $setting['website_url'] ?? '' }}" class="form-control">
+                            <input type="text" wire:model.defer="webiste_url" value="{{ $setting->webiste_url ?? '' }}" class="form-control">
                         </div>
                          <div class="col-md-6 mb-3">
                             <label>Page Title</label>
-                            <input type="text" wire:model.defer="page_title" value="{{ $setting['page_title'] ?? '' }}" class="form-control">
+                            <input type="text" wire:model.defer="page_title" value="{{ $setting->page_title ?? '' }}" class="form-control">
                         </div>
                          <div class="col-md-6 mb-3">
                             <label>Meta keywords</label>
-                            <input type="text" wire:model.defer="meta_keywords" value="{{ $setting['meta_keywords'] ?? '' }}" class="form-control">
+                            <input type="text" wire:model.defer="meta_keyword" value="{{ $setting->meta_keyword ?? '' }}" class="form-control">
                         </div> 
                         <div class="col-md-6 mb-3">
                             <label>Meta Description</label>
-                            <input type="text" wire:model.defer="meta_description" value="{{ $setting['meta_description'] ?? '' }}" class="form-control">
+                            <input type="text" wire:model.defer="meta_description" value="{{ $setting->meta_description ?? '' }}" class="form-control">
                         </div>
                     </div>
                 </div>

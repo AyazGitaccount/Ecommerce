@@ -13,25 +13,7 @@ use App\Mail\inovice_order_mailable;
 class OrderController extends Controller
 {
 
-    public function orderview(Request $request)
-    {
-        $today_date = Carbon::now()->format('Y-m-d'); 
-        $orders = Order::when($request->date !=null, function($q) use ($request){
-
-            return $q->whereDate('created_at',$request->data);
-            }, function($q) use ($today_date){  
-
-                return $q->whereDate('created_at',$today_date);
-        })
-        -> when($request->status !=null, function ($q) use ($request){
-            return $q->where('status_message',$request->status);
-        })->paginate(10);
-                
-        return view('admin.orders.display_order_list',['orders'=>$orders]);
-    }
-
-    
-    public function display(int $order_id)
+    public function orderview( int $order_id)
     {
         $order = Order::where('id',$order_id)->first();
         if($order)
@@ -42,6 +24,30 @@ class OrderController extends Controller
         {
             return redirect('admin/orders')->with('Message','Order ID not found');
         }
+
+        
+    }
+
+    
+    public function display(Request $request)
+    {
+        
+        $today_date = Carbon::now()->format('Y-m-d'); 
+        
+        $filtered_orders = Order::when($request->date !=null, function($q) use ($request){
+
+                   return $q->whereDate('created_at',$request->date);
+           
+                 }, function($q) use ($today_date){  
+
+                   return $q->whereDate('created_at',$today_date);
+      
+               })-> when($request->status !=null, function ($q) use ($request){
+           
+           return $q->where('status_message',$request->status);})->paginate(10);
+               
+       
+           return view('admin.orders.display_order_list',['orders'=>$filtered_orders]);
     }
 
     public function Update_order_status(int $order_id, Request $request )

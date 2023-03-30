@@ -6,7 +6,6 @@
                 <div class="underline"></div>
             </div>
 
-
             @forelse ( $new_products as $item)
             <div class="col-md-3">
                 <div class="product-card shadow">
@@ -17,9 +16,12 @@
                             <img src="{{ asset($item->productImages[0]->image) }}" class="w-100" style="height:155px"
                                 alt="{{ $item->name }}">
                         </a>
+                        @else
+                            no image
+                        
                         @endif
-
                     </div>
+                    
                     <div class="product-card-body">
                         <p class="product-brand">{{ $item->brand }}</p>
                         <h5 class="product-name">

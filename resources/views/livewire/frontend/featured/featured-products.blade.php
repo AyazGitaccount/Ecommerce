@@ -6,7 +6,6 @@
                 <div class="underline"></div>
             </div>
 
-
             @forelse ( $featured_products as $item)
             <div class="col-md-3">
                 <div class="product-card shadow">

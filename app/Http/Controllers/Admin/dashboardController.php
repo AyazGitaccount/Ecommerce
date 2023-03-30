@@ -30,6 +30,7 @@ class dashboardController extends Controller
     
     $total_orders = Order::count();
     $today_orders = Order::whereDate('created_at',$today_date)->count();
+
     $this_month = Order::whereMonth('created_at',$this_month)->count();
     $this_year = Order::whereYear('created_at',$this_year)->count();
      return view('admin.dashboard',compact('total_products','total_cats','total_brands',
