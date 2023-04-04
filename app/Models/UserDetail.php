@@ -13,7 +13,7 @@ class UserDetail extends Model
 
     protected $fillable = [
         'phone',
-        'zip/pin',
+        'zip_code',
         'address',
         'user_id'
     ];

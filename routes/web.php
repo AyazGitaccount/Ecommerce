@@ -8,11 +8,14 @@ use App\Http\Livewire\Admin\Brand\Index;
 use App\Http\Livewire\Frontend\Cartlist;
 use App\Http\Livewire\Frontend\Products;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\GithubController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StripeController;
 use App\Http\Livewire\Frontend\FrontIndex;
 use App\Http\Livewire\Admin\Users\AddUsers;
 use App\Http\Livewire\Frontend\ViewProduct;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Livewire\Admin\Users\UsersPage;
 use App\Http\Livewire\Frontend\ThankYouPage;
 use App\Http\Livewire\Frontend\WishlistPage;
@@ -26,9 +29,9 @@ use App\Http\Livewire\Frontend\Chekcout\Checkout;
 use App\Http\Livewire\Frontend\Orders\OrdersList;
 use App\Http\Livewire\Frontend\CategoryCollection;
 use App\Http\Controllers\Admin\dashboardController;
-use App\Http\Controllers\Login_With_GoogleController;
 use App\Http\Livewire\Admin\SiteSetting\SiteSetting;
 use App\Http\Livewire\ChangePassword\ChangePassword;
+use App\Http\Controllers\Login_With_GoogleController;
 use App\Http\Livewire\Frontend\Search\SearchProducts;
 use App\Http\Livewire\Frontend\Featured\FeaturedProducts;
 use App\Http\Livewire\Frontend\NewArrival\NewArrivalProducts;
@@ -64,12 +67,18 @@ Route::get('/register',Register::class)->name('register');
 Route::get('/login',Login::class)->name('login');
 
 // Login with github
-
+Route::controller(GithubController::class)->group(function(){
+    Route::get('auth/github', 'redirectToGithub')->name('auth.github');
+    Route::get('auth/github/callback', 'handleGithubCallback');
+});
 // Login with Google
 Route::get('authorized/google', [Login_With_GoogleController::class, 'redirect_to_Google']);
 Route::get('authorized/google/callback', [Login_With_GoogleController::class, 'handle_Google_Callback']);
- 
-    // $user->token
+// Login with facebook
+Route::controller(FacebookController::class)->group(function(){
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
 
 Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function()
 {   
@@ -145,3 +154,8 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function()
 // Route::get('/search',[SearchController::class,'search']);
 
 Route::get('/logout',[ Logout::class, 'logout'])->name('logout');
+
+Route::controller(StripeController::class)->group(function(){
+    Route::get('stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});

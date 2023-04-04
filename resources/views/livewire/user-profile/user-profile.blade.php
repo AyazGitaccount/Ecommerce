@@ -6,9 +6,9 @@
                 @if(session('message'))
                 <p class="alert alert-success">{{ session('message') }}</p>
                 @endif
-                <h4 class="mb-4">User Profile
+                {{-- <h4 class="mb-4">User Profile
                   <a href="{{ url('/change_password') }}" class="btn btn-warning float-end">Change Password</a>
-               </h4>
+               </h4> --}}
                 <div class="underline"></div>
             </div>
             <div class="col-md-12">
@@ -43,8 +43,8 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label>Zip/Pin Code</label>
-                                        <input type="text" wire:model.defer='zip_pin' value="{{ $user->userDetail->zip_code ?? '' }}" class="form-control">
-                                        @error('zip_pin')<span class="text-danger">{{ $message }}</span> @enderror
+                                        <input type="text" wire:model.defer='zip_code' value="{{ $user->userDetail->zip_code ?? '' }}" class="form-control">
+                                        @error('zip_code')<span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-12">

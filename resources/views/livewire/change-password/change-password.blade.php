@@ -27,14 +27,15 @@
                             <div class="mb-3">
                                 <label>Current Password</label>
                                 <input type="password" wire:model.defer="current_password" class="form-control" />
+                                
                             </div>
                             <div class="mb-3">
                                 <label>New Password</label>
-                                <input type="password" wire:model.defer="password" class="form-control" />
+                                <input type="password" wire:model.defer="new_password" class="form-control" />
                             </div>
                             <div class="mb-3">
                                 <label>Confirm Password</label>
-                                <input type="password" wire:model.defer="password_confirmation" class="form-control" />
+                                <input type="password" wire:model.defer="confirm_password" class="form-control" />
                             </div> 
                             <div class="mb-3 password-end">
                                 <hr>

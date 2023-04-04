@@ -26,10 +26,12 @@ class Login extends Component
             }
             else
             {
+                
                 return redirect()->to('/home');
                 
             }
         }
+      
 
     }
 

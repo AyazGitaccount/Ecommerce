@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Register extends Component
 {
@@ -22,7 +23,7 @@ class Register extends Component
         ]);
 
         User::create($form);
-        session()->flash('success', 'Your account has been created successfully');
+        session()->flash('message', 'Your account has been created successfully');
         return redirect()->to('/login');
     }
 

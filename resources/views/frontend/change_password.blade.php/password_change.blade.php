@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Cart List')
+@section('title','change password')
 
 <div>
     <livewire:change-password.change-password>

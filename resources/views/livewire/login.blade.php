@@ -31,9 +31,13 @@
                     </form>
                     <p class="text-lead text-center mt-4">Don't have an account ? <a href="{{ url('/register') }}" class="text-decoration-none"> Register</a></p>
                     <div class="text-center">
-                        <i class="fa-brands fa-facebook me-2"></i>                                   
-                        {{-- <i class="fa-brands fa-instagram me-2"></i>                                    --}}
-                        <i class="fa-brands fa-github me-2"></i>                                   
+                        <a href="{{ url('auth/facebook') }}" class="text-decoration-none" style="color:black">
+                            <i class="fa-brands fa-facebook me-2"></i>                                   
+                        </a>
+                        {{-- <i class="fa-brands fa-instagram me-2"></i> --}}
+                        <a href="{{ url('auth/github') }}" class="text-decoration-none" style="color:black">                                 
+                            <i class="fa-brands fa-github me-2"></i>         
+                        </a>
                         <a href="{{ url('authorized/google')}}" class="text-decoration-none" style="color:black">
                             <i class="fa-brands fa-google me-2">      </i>                                   
                         </a>

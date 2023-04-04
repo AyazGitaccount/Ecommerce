@@ -13,6 +13,7 @@ class SearchProducts extends Component
     
     public $search;
     protected $queryString = ['search'];
+   
     public function render()
     {
         $search_result = Product::where('name','like','%'.$this->search.'%')->paginate(3);      

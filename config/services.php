@@ -31,15 +31,15 @@ return [
     ],
 
     'github' => [
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => 'http://example.com/callback-url',
+        'client_id' => env('6ff809d36cc47e572e08'),
+        'client_secret' => env('0ae9b755e36abd17fd164e84b4b0a02c99bbd818'),
+        'redirect' => 'http://localhost:8000/auth/github/callback',
     ],
 
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'http://example.com/callback-url',
+        'client_id' => env('241969928293088'),
+        'client_secret' => env('6987dc7997f40356d853308cccdd2727'),
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
     ],
 
     'google' => [

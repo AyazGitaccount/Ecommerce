@@ -56,21 +56,21 @@ class ProductController extends Controller
             'meta_description' => $validated_data['meta_description'],
         ]);
 
-        if ($request->hasFile('image')) {
-            $uploadPath = 'uploads/products/';
+        if ($request->hasFile('image'))
+        {
+           $uploadPath = 'uploads/products/';
+           foreach ($request->file('image') as $imageFile) {
+               $extention = $imageFile->getClientOriginalExtension();
+               $filename = time() . '.' . $extention;
+               $imageFile->move($uploadPath, $filename);
+               $finalImagePathName = $uploadPath . $filename;
 
-            foreach ($request->file('image') as $imageFile) {
-                $extention = $imageFile->getClientOriginalExtension();
-                $filename = time() . '.' . $extention;
-                $imageFile->move($uploadPath, $filename);
-                $finalImagePathName = $uploadPath . $filename;
-
-                $product->productImages()->create([
-                    'product_id' => $product->id,
-                    'image' => $finalImagePathName,
-                ]);
-            }
-        }
+               $product->productImages()->create([
+                   'product_id' => $product->id,
+                   'image' => $finalImagePathName,
+               ]);
+           }
+       }
 
         if($request->colors)
         {
